@@ -27,6 +27,6 @@ export default defineConfig(({ mode }) => {
       alias: {
         $lib: path.resolve(__dirname, './src/lib'),
       }
-    }
+    },
   }
 })
