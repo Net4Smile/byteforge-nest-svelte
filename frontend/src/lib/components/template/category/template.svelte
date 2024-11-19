@@ -79,7 +79,7 @@
       onmouseleave={handleMouseLeave}
     >
       {#each subcategories as subcategory}
-        <div class="p-2 text-left">{subcategory}</div>
+        <div class="p-2 text-left hover:bg-gray-100">{subcategory}</div>
       {/each}
     </div>
   </div>
