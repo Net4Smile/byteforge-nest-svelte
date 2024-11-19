@@ -1,7 +1,7 @@
 <script lang="ts">
   import * as ShadcnCard from "$lib/components/ui/card";
 
-  type CardProps = {
+  type $$Props = {
     productName: string;
     productPrice: string;
     productDesc: string;
@@ -11,7 +11,7 @@
     };
   };
 
-  const { productName, productPrice, productDesc, productImg }: CardProps =
+  const { productName, productPrice, productDesc, productImg }: $$Props =
     $props();
 </script>
 

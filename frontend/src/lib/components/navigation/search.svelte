@@ -15,22 +15,22 @@
     <span class="hamburger" class:open={$navigationOpen}></span>
   </button>
   <div
-    class="w-full md:flex-grow flex flex-col lg:max-w-lg md:flex-row gap-2 md:gap-0 bg-slate-100 rounded-md overflow-clip"
+    class="w-full shadow md:flex-grow flex flex-col lg:max-w-lg md:flex-row gap-2 md:gap-0 bg-slate-100 rounded-md overflow-clip"
   >
     <Input
       type="search"
-      placeholder="Wyszukaj..."
+      placeholder="Search..."
       class="w-full md:rounded-none bg-transparent placeholder:text-gray-600"
     />
     <div class="w-full md:w-auto hidden md:block">
-      <Select.Root selected={{ value: "all", label: "Wszędzie" }}>
+      <Select.Root selected={{ value: "all", label: "Everywhere" }}>
         <Select.Trigger class="w-full md:w-40 md:rounded-none  bg-transparent">
           <Select.Value />
         </Select.Trigger>
         <Select.Content>
-          <Select.Item value="all">Wszędzie</Select.Item>
-          <Select.Item value="dark">Kategoria 1</Select.Item>
-          <Select.Item value="system">Kategoria 2</Select.Item>
+          <Select.Item value="all">Everywhere</Select.Item>
+          <Select.Item value="dark">Category 1</Select.Item>
+          <Select.Item value="system">Category 2</Select.Item>
         </Select.Content>
       </Select.Root>
     </div>
