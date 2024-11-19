@@ -69,19 +69,19 @@
     >
       {category} <span class="text-sm">&darr;</span>
     </button>
-    <div
-      role="button"
-      tabindex="0"
-      class="same-color w-[200%] absolute transition-[max-height] shadow-lg overflow-hidden rounded-b-lg top-full left-0"
+    <button
+      class="same-color w-fit text-nowrap absolute transition-[max-height] shadow-lg overflow-hidden rounded-b-lg top-full left-0"
       class:max-h-0={dontUseClass}
       class:max-h-fit={useClass}
       onmouseenter={handleMouseEnter}
       onmouseleave={handleMouseLeave}
     >
       {#each subcategories as subcategory}
-        <div class="p-2 text-left hover:bg-gray-100">{subcategory}</div>
+        <div class="py-2 pr-4 pl-2 text-left hover:bg-gray-100">
+          {subcategory}
+        </div>
       {/each}
-    </div>
+    </button>
   </div>
 {/if}
 
