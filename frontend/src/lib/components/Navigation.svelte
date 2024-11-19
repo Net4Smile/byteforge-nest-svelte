@@ -8,6 +8,8 @@
     navigationOpen,
   } from "$lib/stores/shared.svelte";
   import Category from "./template/category/template.svelte";
+  import XShape from "./svg/x-shape.svelte";
+  import BackArrowShape from "./svg/back-arrow-shape.svelte";
 </script>
 
 <nav class="flex flex-col justify-center items-center px-1 pt-1 border-b">
@@ -37,20 +39,7 @@
         class="w-full h-10 flex items-center justify-end px-4 text-lg font-semibold bg-gray-100 hover:bg-gray-200 transition-colors"
       >
         Close
-        <svg
-          class="w-6 h-6 ml-2"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M6 18L18 6M6 6l12 12"
-          ></path>
-        </svg>
+        <XShape />
       </button>
     {:else if $isMobile}
       <button
@@ -60,20 +49,7 @@
         }}
         class="w-full h-10 flex items-center justify-start px-4 text-lg font-semibold bg-gray-100 hover:bg-gray-200 transition-colors"
       >
-        <svg
-          class="w-6 h-6 mr-2"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M10 19l-7-7m0 0l7-7m-7 7h18"
-          ></path>
-        </svg>
+        <BackArrowShape />
         Back
       </button>
     {/if}
