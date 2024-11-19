@@ -31,27 +31,29 @@
     class="flex flex-col md:flex-row items-center w-full max-w-screen-2xl mt-4 max-h-0 motion-safe:transition-all overflow-hidden md:overflow-visible md:max-h-none"
     class:max-h-dvh={$navigationOpen}
   >
-    {#if $isMobile && !$categoryData.open}
-      <button
-        onclick={() => {
-          $navigationOpen = false;
-        }}
-        class="w-full h-10 flex items-center justify-end px-4 text-lg font-semibold bg-gray-100 hover:bg-gray-200 transition-colors"
-      >
-        Close
-        <XShape />
-      </button>
-    {:else if $isMobile}
-      <button
-        onclick={() => {
-          $categoryData.open = !$categoryData.open;
-          $categoryData.id = 0;
-        }}
-        class="w-full h-10 flex items-center justify-start px-4 text-lg font-semibold bg-gray-100 hover:bg-gray-200 transition-colors"
-      >
-        <BackArrowShape />
-        Back
-      </button>
+    {#if $isMobile}
+      {#if !$categoryData.open}
+        <button
+          onclick={() => {
+            $navigationOpen = false;
+          }}
+          class="w-full h-10 flex items-center justify-end px-4 text-lg font-semibold bg-gray-100 hover:bg-gray-200 transition-colors"
+        >
+          Close
+          <XShape />
+        </button>
+      {:else}
+        <button
+          onclick={() => {
+            $categoryData.open = !$categoryData.open;
+            $categoryData.id = 0;
+          }}
+          class="w-full h-10 flex items-center justify-start px-4 text-lg font-semibold bg-gray-100 hover:bg-gray-200 transition-colors"
+        >
+          <BackArrowShape />
+          Back
+        </button>
+      {/if}
     {/if}
     <div class="flex flex-col md:flex-row w-full pt-2" class:gap-2={!$isMobile}>
       <Category
