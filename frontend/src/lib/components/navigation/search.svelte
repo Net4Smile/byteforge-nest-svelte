@@ -3,7 +3,7 @@
   import { Input } from "$lib/components/ui/input";
   import Button from "$lib/components/ui/button/button.svelte";
   import MagnifyingGlass from "../../../assets/magnifying-glass.svg";
-  import { navigationOpen } from "$lib/stores/shared";
+  import { navigationOpen } from "$lib/stores/shared.svelte";
 </script>
 
 <div class="w-full flex flex-row justify-center gap-1">

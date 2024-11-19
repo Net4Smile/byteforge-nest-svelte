@@ -2,7 +2,11 @@
   import Search from "./navigation/search.svelte";
   import Logo from "./navigation/logo.svelte";
   import UserPanel from "./navigation/user_panel.svelte";
-  import { categoryData, isMobile, navigationOpen } from "$lib/stores/shared";
+  import {
+    categoryData,
+    isMobile,
+    navigationOpen,
+  } from "$lib/stores/shared.svelte";
   import Category from "./template/category/template.svelte";
 </script>
 
