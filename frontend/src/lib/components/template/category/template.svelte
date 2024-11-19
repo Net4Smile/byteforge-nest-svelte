@@ -61,7 +61,7 @@
 {:else}
   <div class="relative">
     <button
-      class="w-auto flex justify-between items-center gap-0.5 cursor-pointer same-color px-3 py-1 hover:rounded-t-lg h-full relative"
+      class="w-auto flex justify-between items-center gap-0.5 cursor-pointer same-color px-3 py-2 hover:rounded-t-lg h-full relative"
       class:shadow-none={dontUseClass}
       class:shadow-lg={useClass}
       onmouseenter={handleMouseEnter}

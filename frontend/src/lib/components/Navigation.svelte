@@ -73,7 +73,7 @@
         Back
       </button>
     {/if}
-    <div class="flex flex-col md:flex-row w-full py-2">
+    <div class="flex flex-col md:flex-row w-full pt-2" class:gap-2={!$isMobile}>
       <Category
         id={1}
         category="Kategoria 1"
