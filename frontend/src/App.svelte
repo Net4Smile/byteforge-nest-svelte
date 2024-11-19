@@ -1,6 +1,6 @@
 <script lang="ts">
   import Navigation from "$lib/components/Navigation.svelte";
-  import { isMobile } from "$lib/stores/shared";
+  import { isMobile, websiteName } from "$lib/stores/shared";
 
   $effect(() => {
     const mediaQuery = window.matchMedia("(max-width: 768px)");
@@ -14,6 +14,10 @@
 
   import "./app.css";
 </script>
+
+<svelte:head>
+  <title>Home Page - {websiteName}</title>
+</svelte:head>
 
 <Navigation />
 <main></main>
