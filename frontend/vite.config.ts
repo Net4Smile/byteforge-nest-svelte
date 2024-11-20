@@ -14,6 +14,7 @@ export default defineConfig(({ mode }) => {
 
   return {
     plugins: [svelte()],
+    base: './',
     server: {
       proxy: {
         '/api': {
