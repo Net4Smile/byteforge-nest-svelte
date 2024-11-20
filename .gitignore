@@ -2,6 +2,9 @@
 dist
 node_modules
 build
+dist-ssr
+*.local
+
 
 # Logs
 logs
@@ -61,3 +64,14 @@ report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 Makefile
 redis_data
 postgres_data
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
