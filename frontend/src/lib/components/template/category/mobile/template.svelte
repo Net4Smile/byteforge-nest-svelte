@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { createLink } from "$lib/utils";
   import { categoryData } from "$lib/stores/shared.svelte";
 
   type $$Props = {
@@ -16,11 +17,13 @@
       class="w-full flex flex-col justify-between items-center cursor-pointer h-full relative transition-all"
     >
       {#each subcategories as subcategory}
-        <button
+        <a
+          data-sveltekit-replacestate
+          href={createLink(category, subcategory)}
           class="px-3 py-3 text-left w-full hover:bg-gray-100 transition-colors"
         >
           {subcategory}
-        </button>
+        </a>
       {/each}
     </div>
   </div>

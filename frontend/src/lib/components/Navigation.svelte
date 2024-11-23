@@ -59,7 +59,12 @@
       <Category
         id={1}
         category="Kategoria 1"
-        subcategories={["Podkategoria 1", "Podkategoria 2"]}
+        subcategories={[
+          "Podkategoria 1",
+          "Podkategoria 2",
+          "Podkategoria 3",
+          "Podkategoria 4",
+        ]}
       />
       <Category
         id={2}

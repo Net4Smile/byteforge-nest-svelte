@@ -60,3 +60,11 @@ export const flyAndScale = (
 		easing: cubicOut
 	};
 };
+
+export function createLink(...args: any[]) {
+	return "/" + args.join('/').toLowerCase().replaceAll(" ", '-');
+}
+
+export function normalizeLink(...args: string[]) {
+	return args.map(arg => arg.replaceAll("-", ' ').capitalize());
+}

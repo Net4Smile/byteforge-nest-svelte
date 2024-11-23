@@ -1,10 +1,12 @@
-# compiled output
+# Compiled output
 dist
 node_modules
 build
 dist-ssr
 *.local
-
+.output
+.vercel
+/.svelte-kit
 
 # Logs
 logs
@@ -17,6 +19,7 @@ lerna-debug.log*
 
 # OS
 .DS_Store
+Thumbs.db
 
 # Tests
 /coverage
@@ -38,16 +41,14 @@ lerna-debug.log*
 !.vscode/launch.json
 !.vscode/extensions.json
 
-# dotenv environment variable files
+# Environment variables
 .env
-.env.development.local
-.env.development
-.env.production
-.env.test.local
-.env.production.local
-.env.local
+.env.*
+!.env.example
+!.env.test
+!.env.template
 
-# temp directory
+# Temp directories
 .temp
 .tmp
 
@@ -57,21 +58,24 @@ pids
 *.seed
 *.pid.lock
 
-# Diagnostic reports (https://nodejs.org/api/report.html)
+# Diagnostic reports
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 
-*docker*
-Makefile
-redis_data
-postgres_data
+# Vite
+vite.config.js.timestamp-*
+vite.config.ts.timestamp-*
 
-# Editor directories and files
-.vscode/*
-!.vscode/extensions.json
-.idea
-.DS_Store
+# Other
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
+
+# Custom
+*docker*
+Makefile
+redis_data
+postgres_data
+
+.svelte-kit

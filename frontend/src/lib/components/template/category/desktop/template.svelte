@@ -1,5 +1,6 @@
 <script lang="ts">
-  import { isMobile, categoryData } from "$lib/stores/shared.svelte";
+  import { categoryData } from "$lib/stores/shared.svelte";
+  import { createLink } from "$lib/utils";
 
   type $$Props = {
     id: number | string;
@@ -31,7 +32,9 @@
     onmouseenter={handleMouseEnter}
     onmouseleave={handleMouseLeave}
   >
-    {category} <span class="text-sm">&darr;</span>
+    <a data-sveltekit-replacestate href={createLink(category)}>
+      {category} <span class="text-sm">&darr;</span>
+    </a>
   </button>
   <button
     class="same-color w-fit text-nowrap absolute transition-[max-height] shadow-lg overflow-hidden rounded-b-lg top-full left-0"
@@ -41,9 +44,13 @@
     onmouseleave={handleMouseLeave}
   >
     {#each subcategories as subcategory}
-      <div class="py-2 pr-4 pl-2 text-left hover:bg-gray-100">
+      <a
+        data-sveltekit-replacestate
+        href={createLink(category, subcategory)}
+        class="py-2 pr-4 pl-2 text-left hover:bg-gray-100 block"
+      >
         {subcategory}
-      </div>
+      </a>
     {/each}
   </button>
 </div>
