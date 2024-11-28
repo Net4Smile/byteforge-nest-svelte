@@ -1,14 +1,14 @@
 <script lang="ts">
-  import { createLink } from "$lib/utils";
+  import { createLink } from "$lib/utils/links";
   import { categoryData } from "$lib/stores/shared.svelte";
+  import type { NavCategoryProps } from "../index";
 
-  type $$Props = {
-    id: number | string;
-    category: string;
-    subcategories: string[];
+  let { id, category, subcategories }: NavCategoryProps = $props();
+
+  const handleDropdown = () => {
+    $categoryData.open = !$categoryData.open;
+    $categoryData.id = id;
   };
-
-  let { id, category, subcategories }: $$Props = $props();
 </script>
 
 {#if $categoryData.open && $categoryData.id === id}
@@ -18,8 +18,7 @@
     >
       {#each subcategories as subcategory}
         <a
-          data-sveltekit-replacestate
-          href={createLink(category, subcategory)}
+          href={createLink("categories", category, subcategory)}
           class="px-3 py-3 text-left w-full hover:bg-gray-100 transition-colors"
         >
           {subcategory}
@@ -30,10 +29,7 @@
 {:else if !$categoryData.open}
   <div class="relative flex flex-col items-center w-full">
     <button
-      onclick={() => {
-        $categoryData.open = !$categoryData.open;
-        $categoryData.id = id;
-      }}
+      onclick={handleDropdown}
       class="w-full flex items-center cursor-pointer gap-1 px-3 py-3 h-full relative transition-all hover:bg-gray-100"
     >
       {category} <span class="text-sm">&rarr;</span>

@@ -1,8 +1,8 @@
 <script lang="ts">
   import * as Menubar from "$lib/components/ui/menubar";
   import * as Avatar from "$lib/components/ui/avatar";
-  import HeartFavorite from "../../../assets/heart-favorite.svg";
-  import ShoppingCart from "../../../assets/shopping-cart.svg";
+  import HeartFavorite from "$assets/heart-favorite.svg";
+  import ShoppingCart from "$assets/shopping-cart.svg";
 </script>
 
 <Menubar.Root class="h-full w-full flex items-center border-0">

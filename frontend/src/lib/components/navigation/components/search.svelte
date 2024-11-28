@@ -2,7 +2,7 @@
   import * as Select from "$lib/components/ui/select";
   import { Input } from "$lib/components/ui/input";
   import Button from "$lib/components/ui/button/button.svelte";
-  import MagnifyingGlass from "../../../assets/magnifying-glass.svg";
+  import MagnifyingGlass from "$assets/magnifying-glass.svg";
   import { navigationOpen } from "$lib/stores/shared.svelte";
 </script>
 

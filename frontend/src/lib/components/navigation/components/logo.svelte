@@ -1,5 +1,5 @@
 <script lang="ts">
-  import ByteForge from "../../../assets/ByteForge.svg";
+  import ByteForge from "$assets/ByteForge.svg";
 </script>
 
 <a href="/" data-sveltekit-reload class="h-full flex items-center gap-3">
