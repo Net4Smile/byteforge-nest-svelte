@@ -7,6 +7,7 @@ import { AppResolver } from './app.resolver';
 import { join } from 'path';
 import { PrismaModule } from './prisma/prisma.module';
 import { RedisModule } from './redis/redis.module';
+import { ProductModule } from './products/product.module';
 
 @Module({
   imports: [
@@ -18,7 +19,8 @@ import { RedisModule } from './redis/redis.module';
       path: "/"
     }),
     PrismaModule,
-    RedisModule
+    RedisModule,
+    ProductModule
   ],
   controllers: [AppController],
   providers: [AppService, AppResolver],

@@ -2,6 +2,21 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type Product {
+  description: String!
+  id: ID!
+  image: ProductImage!
+  name: String!
+  price: String!
+}
+
+type ProductImage {
+  alt: String!
+  src: String!
+}
+
 type Query {
+  getProduct(id: String!): Product
+  getProducts: [Product!]!
   hello: String!
 }
