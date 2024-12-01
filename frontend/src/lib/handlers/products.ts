@@ -2,8 +2,9 @@ import { getClient } from '$lib/client';
 import { gql, type ApolloQueryResult, type TypedDocumentNode } from '@apollo/client/core';
 import type { Query } from '../../generated/graphql';
 
-export async function getProduct(id: string, fetch?: (input: RequestInfo, init?: RequestInit) => Promise<Response>, client = getClient(fetch)): Promise<ApolloQueryResult<Pick<Query, "getProduct">>> {
-  const PRODUCT_QUERY: TypedDocumentNode<Query["getProduct"], { id: string }> = gql(`
+export async function getProduct(id: string, fetch?: (input: RequestInfo, init?: RequestInit) => Promise<Response>): Promise<ApolloQueryResult<Pick<Query, "getProduct">>> {
+  const client = getClient(fetch)
+  const PRODUCT_QUERY: TypedDocumentNode<Pick<Query, "getProduct">> = gql`
     query Product($id: String!) {
       getProduct(id: $id) {
         description
@@ -16,7 +17,7 @@ export async function getProduct(id: string, fetch?: (input: RequestInfo, init?:
         price
       }
     }
-  `)
+  `
 
   const request = await client.query<Pick<Query, "getProduct">>({
     query: PRODUCT_QUERY,
