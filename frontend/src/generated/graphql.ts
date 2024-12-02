@@ -14,24 +14,34 @@ export type Scalars = {
   Float: { input: number; output: number; }
 };
 
+export type Category = {
+  __typename?: 'Category';
+  id: Scalars['ID']['output'];
+  name: Scalars['String']['output'];
+};
+
 export type Product = {
   __typename?: 'Product';
+  categories: Array<Category>;
   description: Scalars['String']['output'];
   id: Scalars['ID']['output'];
-  image: ProductImage;
+  image: Array<ProductImage>;
   name: Scalars['String']['output'];
   price: Scalars['String']['output'];
+  specs: Array<Spec>;
 };
 
 export type ProductImage = {
   __typename?: 'ProductImage';
-  alt: Scalars['String']['output'];
+  alt?: Maybe<Scalars['String']['output']>;
+  id: Scalars['ID']['output'];
+  productId: Scalars['String']['output'];
   src: Scalars['String']['output'];
 };
 
 export type Query = {
   __typename?: 'Query';
-  getProduct?: Maybe<Product>;
+  getProduct: Product;
   getProducts: Array<Product>;
   hello: Scalars['String']['output'];
 };
@@ -39,4 +49,11 @@ export type Query = {
 
 export type QueryGetProductArgs = {
   id: Scalars['String']['input'];
+};
+
+export type Spec = {
+  __typename?: 'Spec';
+  id: Scalars['ID']['output'];
+  name: Scalars['String']['output'];
+  value: Scalars['String']['output'];
 };

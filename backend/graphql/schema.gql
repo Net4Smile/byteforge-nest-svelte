@@ -2,21 +2,36 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type Category {
+  id: ID!
+  name: String!
+}
+
 type Product {
+  categories: [Category!]!
   description: String!
   id: ID!
-  image: ProductImage!
+  image: [ProductImage!]!
   name: String!
   price: String!
+  specs: [Spec!]!
 }
 
 type ProductImage {
-  alt: String!
+  alt: String
+  id: ID!
+  productId: String!
   src: String!
 }
 
 type Query {
-  getProduct(id: String!): Product
-  getProducts: [Product!]!
+  getProduct(getCategories: Boolean, getImage: Boolean, getSpecs: Boolean, id: String!): Product
+  getProducts(getCategories: Boolean, getImage: Boolean, getSpecs: Boolean): [Product!]!
   hello: String!
+}
+
+type Spec {
+  id: ID!
+  name: String!
+  value: String!
 }
