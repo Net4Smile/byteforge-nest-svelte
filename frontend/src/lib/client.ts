@@ -10,6 +10,7 @@ export function getClient(fetch?: (input: RequestInfo, init?: RequestInit) => Pr
   const httpLink = new HttpLink({
     uri: '/api/graphql',
     fetch: fetch || (browser ? window.fetch.bind(window) : undefined) as any,
+    credentials: 'include',
   });
 
   client = new ApolloClient({
