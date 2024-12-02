@@ -1,58 +1,58 @@
 import { getClient } from '$lib/client';
-import { gql, type ApolloQueryResult, type TypedDocumentNode } from '@apollo/client/core';
+import { ApolloError, type ApolloQueryResult, type DocumentNode } from '@apollo/client/core';
 import type { Query } from '../../generated/graphql';
+import { GET_PRODUCTS_QUERY, GET_PRODUCT_QUERY } from '$lib/handlers/gql-queries/product';
+import { GraphQLValidationError, NetworkError, QueryErrorHandler } from './errors';
 
-export async function getProduct(id: string, fetch?: (input: RequestInfo, init?: RequestInit) => Promise<Response>): Promise<ApolloQueryResult<Pick<Query, "getProduct">>> {
-  const client = getClient(fetch)
-  const PRODUCT_QUERY: TypedDocumentNode<Pick<Query, "getProduct">> = gql`
-    query Product($id: String!) {
-      getProduct(id: $id) {
-        description
-        id
-        image {
-          src
-          alt
-        }
-        name
-        price
-      }
-    }
-  `
+type FetchType = (input: RequestInfo, init?: RequestInit) => Promise<Response>;
 
-  const request = await client.query<Pick<Query, "getProduct">>({
-    query: PRODUCT_QUERY,
-    variables: {
-      id
-    }
-  });
+type QueryResult<T extends keyof Query> = ApolloQueryResult<Pick<Query, T>>
 
-  return request;
+type Options = {
+  getImage?: boolean,
+  getSpecs?: boolean,
+  getCategories?: boolean
 }
 
-export async function getProducts(fetch?: (input: RequestInfo, init?: RequestInit) => Promise<Response>): Promise<ApolloQueryResult<Pick<Query, "getProducts">>> {
-  const client = getClient(fetch);
-  const PRODUCTS_QUERY: TypedDocumentNode<Pick<Query, "getProducts">, {}> = gql`
-    query Products {
-      getProducts {
-        id
-        name
-        description
-        price
-        image {
-          src
-          alt
-        }
-      }
-    }
-  `;
+export function getProduct(id: string, fetch?: FetchType, options?: Options): Promise<QueryResult<"getProduct">> {
+  const errorHandler = new QueryErrorHandler('Failed to fetch product');
+  return executeQuery("getProduct", GET_PRODUCT_QUERY, { id, ...options }, errorHandler, fetch);
+}
 
+export function getProducts(fetch?: FetchType, options?: Options): Promise<QueryResult<"getProducts">> {
+  const errorHandler = new QueryErrorHandler('Failed to fetch products');
+  return executeQuery("getProducts", GET_PRODUCTS_QUERY, options, errorHandler, fetch);
+}
+
+async function executeQuery<T extends keyof Query>(
+  operationName: string,
+  query: DocumentNode,
+  variables: any,
+  errorHandler: InstanceType<typeof QueryErrorHandler>,
+  fetch?: FetchType,
+): Promise<QueryResult<T>> {
+  const client = getClient(fetch);
   try {
-    const result = await client.query<Pick<Query, "getProducts">>({
-      query: PRODUCTS_QUERY
-    });
+    const result = await client.query({ query, variables });
+
+    if (!result.data) throw errorHandler;
+
     return result;
   } catch (error) {
-    console.error('Error fetching products:', error);
-    throw error;
+    if (error instanceof ApolloError) {
+      if (error.networkError) {
+        throw new NetworkError('Unable to connect to the server');
+      } else if (error.graphQLErrors) {
+        throw new GraphQLValidationError('GraphQL query validation failed');
+      }
+    } else if (error instanceof Error) {
+      console.error('Unexpected error:', error.message);
+    } else if (error instanceof QueryErrorHandler) {
+      console.error('Query error:', error.toString());
+    } else {
+      console.error('Unknown error:', error);
+    }
+
+    throw new QueryErrorHandler(errorHandler.message, { operationName, query, variables });
   }
 }
