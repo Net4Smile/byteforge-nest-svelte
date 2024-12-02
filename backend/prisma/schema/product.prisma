@@ -1,0 +1,31 @@
+model Category {
+  id       String    @id @unique @default(uuid())
+  name     String
+  products Product[]
+}
+
+model Spec {
+  id        String  @id @unique @default(uuid())
+  name      String
+  value     String
+  product   Product @relation(fields: [productId], references: [id])
+  productId String
+}
+
+model Product {
+  id          String         @id @unique @default(uuid())
+  name        String
+  description String
+  price       String
+  image       ProductImage[]
+  categories  Category[]
+  specs       Spec[]
+}
+
+model ProductImage {
+  id        String  @id @unique @default(uuid())
+  src       String
+  alt       String?
+  productId String
+  product   Product @relation(fields: [productId], references: [id])
+}
