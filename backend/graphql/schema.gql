@@ -7,6 +7,16 @@ type Category {
   name: String!
 }
 
+input CreateUserDto {
+  email: String
+  password: String!
+  username: String
+}
+
+type Mutation {
+  signIn(signInDto: CreateUserDto!): String!
+}
+
 type Product {
   categories: [Category!]!
   description: String!
@@ -27,6 +37,7 @@ type ProductImage {
 type Query {
   getProduct(getCategories: Boolean, getImage: Boolean, getSpecs: Boolean, id: String!): Product
   getProducts(getCategories: Boolean, getImage: Boolean, getSpecs: Boolean): [Product!]!
+  getUserInfo: User!
   hello: String!
 }
 
@@ -34,4 +45,13 @@ type Spec {
   id: ID!
   name: String!
   value: String!
+}
+
+type User {
+  avatar: String!
+  email: String!
+  firstName: String!
+  lastName: String!
+  sub: ID!
+  user: String!
 }

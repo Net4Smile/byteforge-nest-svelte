@@ -8,6 +8,8 @@ import { join } from 'path';
 import { PrismaModule } from './prisma/prisma.module';
 import { RedisModule } from './redis/redis.module';
 import { ProductModule } from './products/product.module';
+import { AuthModule } from './auth/auth.module';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
@@ -18,9 +20,13 @@ import { ProductModule } from './products/product.module';
       playground: false,
       path: "/"
     }),
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
     PrismaModule,
     RedisModule,
-    ProductModule
+    ProductModule,
+    AuthModule
   ],
   controllers: [AppController],
   providers: [AppService, AppResolver],
