@@ -20,6 +20,22 @@ export type Category = {
   name: Scalars['String']['output'];
 };
 
+export type CreateUserDto = {
+  email?: InputMaybe<Scalars['String']['input']>;
+  password: Scalars['String']['input'];
+  username?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type Mutation = {
+  __typename?: 'Mutation';
+  signIn: Scalars['String']['output'];
+};
+
+
+export type MutationSignInArgs = {
+  signInDto: CreateUserDto;
+};
+
 export type Product = {
   __typename?: 'Product';
   categories: Array<Category>;
@@ -41,14 +57,25 @@ export type ProductImage = {
 
 export type Query = {
   __typename?: 'Query';
-  getProduct: Product;
+  getProduct?: Maybe<Product>;
   getProducts: Array<Product>;
+  getUserInfo: Scalars['String']['output'];
   hello: Scalars['String']['output'];
 };
 
 
 export type QueryGetProductArgs = {
+  getCategories?: InputMaybe<Scalars['Boolean']['input']>;
+  getImage?: InputMaybe<Scalars['Boolean']['input']>;
+  getSpecs?: InputMaybe<Scalars['Boolean']['input']>;
   id: Scalars['String']['input'];
+};
+
+
+export type QueryGetProductsArgs = {
+  getCategories?: InputMaybe<Scalars['Boolean']['input']>;
+  getImage?: InputMaybe<Scalars['Boolean']['input']>;
+  getSpecs?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 export type Spec = {
