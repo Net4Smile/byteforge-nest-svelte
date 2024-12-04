@@ -59,7 +59,7 @@ export type Query = {
   __typename?: 'Query';
   getProduct?: Maybe<Product>;
   getProducts: Array<Product>;
-  getUserInfo: Scalars['String']['output'];
+  getUserInfo: User;
   hello: Scalars['String']['output'];
 };
 
@@ -83,4 +83,13 @@ export type Spec = {
   id: Scalars['ID']['output'];
   name: Scalars['String']['output'];
   value: Scalars['String']['output'];
+};
+
+export type User = {
+  __typename?: 'User';
+  email: Scalars['String']['output'];
+  firstName: Scalars['String']['output'];
+  lastName: Scalars['String']['output'];
+  sub: Scalars['ID']['output'];
+  user: Scalars['String']['output'];
 };

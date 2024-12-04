@@ -48,7 +48,6 @@ type Spec {
 }
 
 type User {
-  avatar: String!
   email: String!
   firstName: String!
   lastName: String!

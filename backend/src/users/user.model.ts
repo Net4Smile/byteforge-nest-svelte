@@ -15,8 +15,5 @@ export class User {
   lastName: string;
 
   @Field(() => String)
-  avatar: string;
-
-  @Field(() => String)
   user: string;
 }
