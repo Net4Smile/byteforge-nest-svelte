@@ -1,4 +1,4 @@
-import type { Query } from "../../generated/graphql";
+import type { Query } from "../../../generated/graphql";
 import { type ApolloQueryResult } from "@apollo/client/core";
 
 export type FetchType = (input: RequestInfo, init?: RequestInit) => Promise<Response>;

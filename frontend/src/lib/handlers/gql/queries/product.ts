@@ -1,4 +1,4 @@
-import type { Query } from "../../../generated/graphql";
+import type { Query } from "../../../../generated/graphql";
 import { gql, type TypedDocumentNode } from "@apollo/client/core";
 
 export const GET_PRODUCT_QUERY: TypedDocumentNode<Pick<Query, "getProduct">, { id: string }> = gql`

@@ -1,7 +1,7 @@
 import type { DocumentNode } from "graphql";
 import { GraphQLValidationError, NetworkError, QueryErrorHandler } from "./errors";
 import type { FetchType, QueryResult } from './types';
-import type { Query, QueryGetCategoriesArgs, QueryGetCategoryArgs, QueryGetProductArgs, QueryGetProductsArgs, QueryGetSpecificationArgs, QueryGetSpecificationsArgs } from "../../generated/graphql";
+import type { Query, QueryGetCategoriesArgs, QueryGetCategoryArgs, QueryGetProductArgs, QueryGetProductsArgs, QueryGetSpecificationArgs, QueryGetSpecificationsArgs } from "../../../generated/graphql";
 import { getClient } from "$lib/client";
 import { ApolloError } from "@apollo/client/errors";
 

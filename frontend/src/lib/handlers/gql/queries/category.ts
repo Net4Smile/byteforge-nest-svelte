@@ -1,9 +1,9 @@
-import type { Query } from "../../../generated/graphql";
+import type { Query } from "../../../../generated/graphql";
 import { gql, type TypedDocumentNode } from "@apollo/client/core";
 
 export const GET_CATEGORY_QUERY: TypedDocumentNode<Pick<Query, "getCategory">, { id: string }> = gql`
   query GetCategory($id: String!, $getProducts: Boolean! = false, $getIsParent: Boolean! = false) {
-    getCategory(id: $id, getProducts: $getProducts) {
+    getCategory(id: $id, getProducts: $getProducts, getIsParent: $getIsParent) {
       id
       name
       products @include(if: $getProducts) {

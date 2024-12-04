@@ -1,7 +1,7 @@
-import { GET_PRODUCTS_QUERY, GET_PRODUCT_QUERY } from '$lib/handlers/gql-queries/product';
+import { GET_PRODUCTS_QUERY, GET_PRODUCT_QUERY } from '$lib/handlers/gql/queries/product';
 import type { FetchType, QueryResult } from './types';
 import { executeQuery } from './executor';
-import type { QueryGetProductArgs, QueryGetProductsArgs } from '../../generated/graphql';
+import type { QueryGetProductArgs, QueryGetProductsArgs } from '../../../generated/graphql';
 
 export function getProduct(id: string, fetch?: FetchType, options?: QueryGetProductArgs): Promise<QueryResult<"getProduct">> {
   const ERROR_MESSAGE = 'No product found';
