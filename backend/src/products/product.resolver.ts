@@ -34,7 +34,7 @@ export class ProductResolver {
         return null;
       }
 
-      return product as Product;
+      return product;
     } catch (e) {
       return null;
     }

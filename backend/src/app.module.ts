@@ -10,6 +10,8 @@ import { RedisModule } from './redis/redis.module';
 import { ProductModule } from './products/product.module';
 import { AuthModule } from './auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
+import { CategoryModule } from './categories/category.module';
+import { SpecificationModule } from './specification/specification.module';
 
 @Module({
   imports: [
@@ -26,6 +28,8 @@ import { ConfigModule } from '@nestjs/config';
     PrismaModule,
     RedisModule,
     ProductModule,
+    CategoryModule,
+    SpecificationModule,
     AuthModule
   ],
   controllers: [AppController],

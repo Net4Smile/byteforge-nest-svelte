@@ -4,22 +4,21 @@ model Category {
   products Product[]
 }
 
-model Spec {
-  id        String  @id @unique @default(uuid())
-  name      String
-  value     String
-  product   Product @relation(fields: [productId], references: [id])
-  productId String
+model Specification {
+  id       String    @id @unique @default(uuid())
+  name     String
+  value    String
+  products Product[]
 }
 
 model Product {
-  id          String         @id @unique @default(uuid())
+  id          String          @id @unique @default(uuid())
   name        String
   description String
   price       String
   image       ProductImage[]
   categories  Category[]
-  specs       Spec[]
+  specs       Specification[]
 }
 
 model ProductImage {

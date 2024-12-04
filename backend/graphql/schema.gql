@@ -24,7 +24,7 @@ type Product {
   image: [ProductImage!]!
   name: String!
   price: String!
-  specs: [Spec!]!
+  specifications: [Specification!]!
 }
 
 type ProductImage {
@@ -35,13 +35,17 @@ type ProductImage {
 }
 
 type Query {
+  getCategories(getProducts: Boolean): [Category!]!
+  getCategory(getProducts: Boolean, id: String!): Category
   getProduct(getCategories: Boolean, getImage: Boolean, getSpecs: Boolean, id: String!): Product
   getProducts(getCategories: Boolean, getImage: Boolean, getSpecs: Boolean): [Product!]!
+  getSpecification(getProducts: Boolean, id: String!): Specification
+  getSpecifications(getProducts: Boolean): [Specification!]!
   getUserInfo: User!
   hello: String!
 }
 
-type Spec {
+type Specification {
   id: ID!
   name: String!
   value: String!

@@ -1,4 +1,6 @@
 import { ObjectType, Field, ID } from '@nestjs/graphql';
+import { Category } from '../categories/category.model';
+import { Specification } from '../specification/specification.model';
 
 @ObjectType()
 class ProductImage {
@@ -13,27 +15,6 @@ class ProductImage {
 
   @Field()
   productId!: string;
-}
-
-@ObjectType()
-class Category {
-  @Field(() => ID)
-  id!: string;
-
-  @Field()
-  name!: string;
-}
-
-@ObjectType()
-class Spec {
-  @Field(() => ID)
-  id!: string;
-
-  @Field()
-  name!: string;
-
-  @Field()
-  value!: string;
 }
 
 @ObjectType()
@@ -56,6 +37,6 @@ export class Product {
   @Field(() => [Category])
   categories!: Category[];
 
-  @Field(() => [Spec])
-  specs!: Spec[];
+  @Field(() => [Specification])
+  specifications!: Specification[];
 }
