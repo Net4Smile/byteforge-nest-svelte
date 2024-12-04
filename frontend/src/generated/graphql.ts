@@ -17,7 +17,9 @@ export type Scalars = {
 export type Category = {
   __typename?: 'Category';
   id: Scalars['ID']['output'];
+  isParent: Scalars['Boolean']['output'];
   name: Scalars['String']['output'];
+  products: Array<Product>;
 };
 
 export type CreateUserDto = {
@@ -44,7 +46,7 @@ export type Product = {
   image: Array<ProductImage>;
   name: Scalars['String']['output'];
   price: Scalars['String']['output'];
-  specs: Array<Spec>;
+  specifications: Array<Specification>;
 };
 
 export type ProductImage = {
@@ -57,10 +59,27 @@ export type ProductImage = {
 
 export type Query = {
   __typename?: 'Query';
+  getCategories: Array<Category>;
+  getCategory?: Maybe<Category>;
   getProduct?: Maybe<Product>;
   getProducts: Array<Product>;
+  getSpecification?: Maybe<Specification>;
+  getSpecifications: Array<Specification>;
   getUserInfo: User;
   hello: Scalars['String']['output'];
+};
+
+
+export type QueryGetCategoriesArgs = {
+  getIsParent?: InputMaybe<Scalars['Boolean']['input']>;
+  getProducts?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+
+export type QueryGetCategoryArgs = {
+  getIsParent?: InputMaybe<Scalars['Boolean']['input']>;
+  getProducts?: InputMaybe<Scalars['Boolean']['input']>;
+  id: Scalars['String']['input'];
 };
 
 
@@ -78,10 +97,22 @@ export type QueryGetProductsArgs = {
   getSpecs?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
-export type Spec = {
-  __typename?: 'Spec';
+
+export type QueryGetSpecificationArgs = {
+  getProducts?: InputMaybe<Scalars['Boolean']['input']>;
+  id: Scalars['String']['input'];
+};
+
+
+export type QueryGetSpecificationsArgs = {
+  getProducts?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type Specification = {
+  __typename?: 'Specification';
   id: Scalars['ID']['output'];
   name: Scalars['String']['output'];
+  products: Array<Product>;
   value: Scalars['String']['output'];
 };
 

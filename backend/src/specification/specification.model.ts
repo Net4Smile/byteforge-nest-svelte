@@ -1,4 +1,5 @@
 import { Field, ID, ObjectType } from "@nestjs/graphql";
+import { Product } from "../products/product.model";
 
 @ObjectType()
 export class Specification {
@@ -10,4 +11,7 @@ export class Specification {
 
   @Field()
   value!: string;
+
+  @Field(() => [Product])
+  products!: Product[];
 }

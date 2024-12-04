@@ -2,6 +2,7 @@ model Category {
   id       String    @id @unique @default(uuid())
   name     String
   products Product[]
+  isParent Boolean
 }
 
 model Specification {

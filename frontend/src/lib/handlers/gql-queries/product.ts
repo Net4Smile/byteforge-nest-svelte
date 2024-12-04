@@ -9,10 +9,11 @@ export const GET_PRODUCT_QUERY: TypedDocumentNode<Pick<Query, "getProduct">, { i
       description
       price
       image @include(if: $getImage) {
+        id
         src
         alt
       }
-      specs @include(if: $getSpecs) {
+      specifications @include(if: $getSpecs) {
         id
         name
         value
@@ -33,10 +34,11 @@ export const GET_PRODUCTS_QUERY: TypedDocumentNode<Pick<Query, "getProducts">, {
       description
       price
       image @include(if: $getImage) {
+        id
         src
         alt
       }
-      specs @include(if: $getSpecs) {
+      specifications @include(if: $getSpecs) {
         id
         name
         value

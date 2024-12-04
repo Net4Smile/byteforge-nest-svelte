@@ -4,7 +4,9 @@
 
 type Category {
   id: ID!
+  isParent: Boolean!
   name: String!
+  products: [Product!]!
 }
 
 input CreateUserDto {
@@ -35,8 +37,8 @@ type ProductImage {
 }
 
 type Query {
-  getCategories(getProducts: Boolean): [Category!]!
-  getCategory(getProducts: Boolean, id: String!): Category
+  getCategories(getIsParent: Boolean, getProducts: Boolean): [Category!]!
+  getCategory(getIsParent: Boolean, getProducts: Boolean, id: String!): Category
   getProduct(getCategories: Boolean, getImage: Boolean, getSpecs: Boolean, id: String!): Product
   getProducts(getCategories: Boolean, getImage: Boolean, getSpecs: Boolean): [Product!]!
   getSpecification(getProducts: Boolean, id: String!): Specification
@@ -48,6 +50,7 @@ type Query {
 type Specification {
   id: ID!
   name: String!
+  products: [Product!]!
   value: String!
 }
 
