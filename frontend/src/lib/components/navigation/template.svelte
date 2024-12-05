@@ -12,7 +12,7 @@
 </script>
 
 <nav
-  class="flex flex-col justify-center items-center px-1 pt-1 border-b z-[9999] sticky top-0"
+  class="flex flex-col justify-center items-center px-1 pt-1 border-b z-[9999] sticky top-0 bg-white"
 >
   <div class="flex flex-col md:flex-row items-center w-full max-w-screen-2xl">
     <div
