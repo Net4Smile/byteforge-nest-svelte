@@ -39,15 +39,21 @@ export class CategoryResolver {
   @Query(() => [Category])
   async getCategories(
     @Args('getProducts', { nullable: true, type: () => Boolean }) getProducts?: boolean,
+    @Args('getSpecifications', { nullable: true, type: () => Boolean }) getSpecifications?: boolean,
     @Args('getIsParent', { nullable: true, type: () => Boolean }) getIsParent?: boolean
   ) {
     const products = getProducts ?? false;
+    const specifications = getSpecifications ?? false;
     const isParent = getIsParent ?? false;
 
     const categoryQuery: Prisma.CategoryFindManyArgs = {
       where: { isParent },
       include: {
-        products
+        products: products ? {
+          include: {
+            specs: specifications
+          }
+        } : false
       }
     } as const;
 

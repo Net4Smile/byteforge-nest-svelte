@@ -11,13 +11,19 @@ export class SpecificationResolver {
   async getSpecification(
     @Args('id', { type: () => String }) id: string,
     @Args('getProducts', { nullable: true, type: () => Boolean }) getProducts?: boolean,
+    @Args('getProductsCategories', { nullable: true, type: () => Boolean }) getProductsCategories?: boolean,
   ) {
     const products = getProducts ?? false;
+    const productsCategories = getProductsCategories ?? false;
 
     const specificationQuery: Prisma.SpecificationFindUniqueArgs = {
       where: { id },
       include: {
-        products
+        products: products ? {
+          include: {
+            categories: productsCategories
+          }
+        } : false
       }
     } as const;
 
@@ -37,13 +43,20 @@ export class SpecificationResolver {
   @Query(() => [Specification])
   async getSpecifications(
     @Args('getProducts', { nullable: true, type: () => Boolean }) getProducts?: boolean,
+    @Args('getProductsCategories', { nullable: true, type: () => Boolean }) getProductsCategories?: boolean,
+
   ) {
     const products = getProducts ?? false;
+    const productsCategories = getProductsCategories ?? false;
 
     const specificationQuery: Prisma.SpecificationFindManyArgs = {
       include: {
-        products
-      }
+        products: products ? {
+          include: {
+            categories: productsCategories
+          }
+        } : false
+      },
     } as const;
 
     try {

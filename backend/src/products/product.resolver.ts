@@ -44,7 +44,9 @@ export class ProductResolver {
   async getProducts(
     @Args('getCategories', { nullable: true, type: () => Boolean }) getCategories?: boolean,
     @Args('getSpecs', { nullable: true, type: () => Boolean }) getSpecs?: boolean,
-    @Args('getImage', { nullable: true, type: () => Boolean }) getImage?: boolean
+    @Args('getImage', { nullable: true, type: () => Boolean }) getImage?: boolean,
+    @Args('after', { nullable: true, type: () => Number }) after?: number,
+    @Args('limit', { nullable: true, type: () => Number }) limit?: number,
   ) {
     const image = getImage ?? false;
     const specs = getSpecs ?? false;
@@ -55,7 +57,9 @@ export class ProductResolver {
         image,
         specs,
         categories
-      }
+      },
+      skip: after,
+      take: limit
     } as const;
 
     try {

@@ -73,6 +73,7 @@ export type Query = {
 export type QueryGetCategoriesArgs = {
   getIsParent?: InputMaybe<Scalars['Boolean']['input']>;
   getProducts?: InputMaybe<Scalars['Boolean']['input']>;
+  getSpecifications?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 
@@ -92,20 +93,24 @@ export type QueryGetProductArgs = {
 
 
 export type QueryGetProductsArgs = {
+  after?: InputMaybe<Scalars['Float']['input']>;
   getCategories?: InputMaybe<Scalars['Boolean']['input']>;
   getImage?: InputMaybe<Scalars['Boolean']['input']>;
   getSpecs?: InputMaybe<Scalars['Boolean']['input']>;
+  limit?: InputMaybe<Scalars['Float']['input']>;
 };
 
 
 export type QueryGetSpecificationArgs = {
   getProducts?: InputMaybe<Scalars['Boolean']['input']>;
+  getProductsCategories?: InputMaybe<Scalars['Boolean']['input']>;
   id: Scalars['String']['input'];
 };
 
 
 export type QueryGetSpecificationsArgs = {
   getProducts?: InputMaybe<Scalars['Boolean']['input']>;
+  getProductsCategories?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 export type Specification = {

@@ -37,12 +37,12 @@ type ProductImage {
 }
 
 type Query {
-  getCategories(getIsParent: Boolean, getProducts: Boolean): [Category!]!
+  getCategories(getIsParent: Boolean, getProducts: Boolean, getSpecifications: Boolean): [Category!]!
   getCategory(getIsParent: Boolean, getProducts: Boolean, id: String!): Category
   getProduct(getCategories: Boolean, getImage: Boolean, getSpecs: Boolean, id: String!): Product
-  getProducts(getCategories: Boolean, getImage: Boolean, getSpecs: Boolean): [Product!]!
-  getSpecification(getProducts: Boolean, id: String!): Specification
-  getSpecifications(getProducts: Boolean): [Specification!]!
+  getProducts(after: Float, getCategories: Boolean, getImage: Boolean, getSpecs: Boolean, limit: Float): [Product!]!
+  getSpecification(getProducts: Boolean, getProductsCategories: Boolean, id: String!): Specification
+  getSpecifications(getProducts: Boolean, getProductsCategories: Boolean): [Specification!]!
   getUserInfo: User!
   hello: String!
 }

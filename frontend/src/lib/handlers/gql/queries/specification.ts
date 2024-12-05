@@ -18,7 +18,7 @@ export const GET_SPECIFICATION_QUERY: TypedDocumentNode<Pick<Query, "getSpecific
 `;
 
 export const GET_SPECIFICATIONS_QUERY: TypedDocumentNode<Pick<Query, "getSpecifications">, {}> = gql`
-  query GetSpecifications($getProducts: Boolean! = false) {
+  query GetSpecifications($getProducts: Boolean! = false, $getCategories: Boolean! = false) {
     getSpecifications(getProducts: $getProducts) {
       id
       name
@@ -28,6 +28,10 @@ export const GET_SPECIFICATIONS_QUERY: TypedDocumentNode<Pick<Query, "getSpecifi
         name
         description
         price
+      }
+      categories @include(if: $getCategories) {
+        id
+        name
       }
     }
   }

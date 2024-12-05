@@ -18,8 +18,8 @@ export const GET_CATEGORY_QUERY: TypedDocumentNode<Pick<Query, "getCategory">, {
 `;
 
 export const GET_CATEGORIES_QUERY: TypedDocumentNode<Pick<Query, "getCategories">, {}> = gql`
-  query GetCategories($getProducts: Boolean! = false, $getIsParent: Boolean! = false) {
-    getCategories(getProducts: $getProducts, getIsParent: $getIsParent) {
+  query GetCategories($getProducts: Boolean! = false, $getIsParent: Boolean! = false, $getSpecifications: Boolean! = false) {
+    getCategories(getProducts: $getProducts, getIsParent: $getIsParent, getSpecifications: $getSpecifications) {
       id
       name
       products @include(if: $getProducts) {
@@ -29,6 +29,11 @@ export const GET_CATEGORIES_QUERY: TypedDocumentNode<Pick<Query, "getCategories"
         price
       }
       isParent @include(if: $getIsParent)
+      specifications @include(if: $getSpecifications) {
+        id
+        name
+        value
+      }
     }
   }
 `;
