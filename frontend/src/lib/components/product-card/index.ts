@@ -1,6 +1,7 @@
 import Card from "./template.svelte"
 
 export type CardProps = {
+  productId: string;
   productName: string;
   productPrice: string;
   productDesc: string;
