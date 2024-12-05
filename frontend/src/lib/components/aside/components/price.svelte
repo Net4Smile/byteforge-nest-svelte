@@ -17,25 +17,31 @@
 <div class="price-filter">
   <h3 class="price-filter-title">Price Range</h3>
   <div class="price-inputs">
-    <input
-      type="number"
-      class="price-input"
-      placeholder={minPrice.toString()}
-      min={minPrice}
-      max={maxPrice}
-      value={priceSlider.inputMinPrice}
-      oninput={priceSlider.handleInputChange("min")}
-    />
+    <div class="price-input-container">
+      <input
+        type="number"
+        class="price-input"
+        placeholder={"From"}
+        min={minPrice}
+        max={maxPrice}
+        value={priceSlider.inputMinPrice}
+        oninput={priceSlider.handleInputChange("min")}
+      />
+      <span class="price-input-currency">zł</span>
+    </div>
     <span class="price-separator">-</span>
-    <input
-      type="number"
-      class="price-input"
-      min={minPrice}
-      max={maxPrice}
-      placeholder={maxPrice.toString()}
-      value={priceSlider.inputMaxPrice}
-      oninput={priceSlider.handleInputChange("max")}
-    />
+    <div class="price-input-container">
+      <input
+        type="number"
+        class="price-input"
+        min={minPrice}
+        max={maxPrice}
+        placeholder={"To"}
+        value={priceSlider.inputMaxPrice}
+        oninput={priceSlider.handleInputChange("max")}
+      />
+      <span class="price-input-currency">zł</span>
+    </div>
   </div>
 
   <SliderComponent
@@ -57,10 +63,17 @@
     @apply flex items-center mb-2 justify-center;
   }
 
-  .price-input {
-    @apply w-20 p-1 border border-gray-300 rounded-[2px] text-sm;
+  .price-input-container {
+    @apply w-20 p-1 border border-gray-300 rounded-[2px] text-sm flex flex-row gap-2;
   }
 
+  .price-input {
+    @apply focus-within:outline-none w-4/5;
+  }
+
+  .price-input-currency {
+    @apply text-gray-500 select-none;
+  }
   .price-separator {
     @apply mx-2 text-gray-600;
   }
