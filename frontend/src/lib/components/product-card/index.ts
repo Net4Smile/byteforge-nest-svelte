@@ -1,14 +1,12 @@
-import Card from "./template.svelte"
+import type { Product } from "../../../generated/graphql";
+import Card from "./template.svelte";
 
 export type CardProps = {
-  productId: string;
-  productName: string;
-  productPrice: string;
-  productDesc: string;
-  productImg: {
-    src: string;
-    alt?: string;
-  };
+  productId: Product["id"];
+  productName: Product["name"];
+  productPrice: Product["price"];
+  productDesc: Product["description"];
+  productImg: Product["image"][0]
   buttonText?: string;
 };
 

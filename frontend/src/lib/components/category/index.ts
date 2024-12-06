@@ -1,9 +1,10 @@
-import Category from "./template.svelte";
+import type { Subcategory, Category } from "../../../generated/graphql";
+import CategoryComponent from "./template.svelte";
 
 export type NavCategoryProps = {
   id: number | string;
-  category: string;
-  subcategories: string[];
+  category: Category;
+  subcategories: Subcategory[];
 };
 
-export default Category
+export default CategoryComponent

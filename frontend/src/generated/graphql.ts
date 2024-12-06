@@ -17,9 +17,10 @@ export type Scalars = {
 export type Category = {
   __typename?: 'Category';
   id: Scalars['ID']['output'];
-  isParent: Scalars['Boolean']['output'];
   name: Scalars['String']['output'];
   products: Array<Product>;
+  specifications: Array<Specification>;
+  subcategories: Array<Subcategory>;
 };
 
 export type CreateUserDto = {
@@ -71,14 +72,12 @@ export type Query = {
 
 
 export type QueryGetCategoriesArgs = {
-  getIsParent?: InputMaybe<Scalars['Boolean']['input']>;
   getProducts?: InputMaybe<Scalars['Boolean']['input']>;
   getSpecifications?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 
 export type QueryGetCategoryArgs = {
-  getIsParent?: InputMaybe<Scalars['Boolean']['input']>;
   getProducts?: InputMaybe<Scalars['Boolean']['input']>;
   id: Scalars['String']['input'];
 };
@@ -115,6 +114,14 @@ export type QueryGetSpecificationsArgs = {
 
 export type Specification = {
   __typename?: 'Specification';
+  id: Scalars['ID']['output'];
+  name: Scalars['String']['output'];
+  products: Array<Product>;
+  value: Scalars['String']['output'];
+};
+
+export type Subcategory = {
+  __typename?: 'Subcategory';
   id: Scalars['ID']['output'];
   name: Scalars['String']['output'];
   products: Array<Product>;

@@ -32,6 +32,11 @@ export const GET_SPECIFICATIONS_QUERY: TypedDocumentNode<Pick<Query, "getSpecifi
       categories @include(if: $getCategories) {
         id
         name
+        subcategories {
+          id
+          name
+          value
+        }
       }
     }
   }

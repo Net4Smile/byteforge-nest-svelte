@@ -11,15 +11,14 @@ export class CategoryResolver {
   async getCategory(
     @Args('id', { type: () => String }) id: string,
     @Args('getProducts', { nullable: true, type: () => Boolean }) getProducts?: boolean,
-    @Args('getIsParent', { nullable: true, type: () => Boolean }) getIsParent?: boolean
   ) {
     const products = getProducts ?? false;
-    const isParent = getIsParent ?? false;
 
     const categoryQuery: Prisma.CategoryFindUniqueArgs = {
-      where: { id, isParent },
+      where: { id },
       include: {
         products,
+        subcategories: true
       }
     } as const;
 
@@ -40,14 +39,11 @@ export class CategoryResolver {
   async getCategories(
     @Args('getProducts', { nullable: true, type: () => Boolean }) getProducts?: boolean,
     @Args('getSpecifications', { nullable: true, type: () => Boolean }) getSpecifications?: boolean,
-    @Args('getIsParent', { nullable: true, type: () => Boolean }) getIsParent?: boolean
   ) {
     const products = getProducts ?? false;
     const specifications = getSpecifications ?? false;
-    const isParent = getIsParent ?? false;
 
     const categoryQuery: Prisma.CategoryFindManyArgs = {
-      where: { isParent },
       include: {
         products: products ? {
           include: {

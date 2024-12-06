@@ -1,8 +1,15 @@
+model Subcategories {
+  id         String    @id @unique @default(uuid())
+  name       String
+  Category   Category? @relation(fields: [categoryId], references: [id])
+  categoryId String?
+}
+
 model Category {
-  id       String    @id @unique @default(uuid())
-  name     String
-  products Product[]
-  isParent Boolean
+  id            String          @id @unique @default(uuid())
+  name          String
+  products      Product[]
+  subcategories Subcategories[]
 }
 
 model Specification {

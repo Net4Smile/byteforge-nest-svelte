@@ -27,7 +27,7 @@ export const GET_PRODUCT_QUERY: TypedDocumentNode<Pick<Query, "getProduct">, { i
 `;
 
 export const GET_PRODUCTS_QUERY: TypedDocumentNode<Pick<Query, "getProducts">, { after?: number, limit?: number }> = gql`
-  query GetProducts($getImage: Boolean! = false, $getSpecs: Boolean! = false, $getCategories: Boolean! = false, $after: Int, $limit: Int) {
+  query GetProducts($getImage: Boolean! = false, $getSpecs: Boolean! = false, $getCategories: Boolean! = false, $after: Float, $limit: Float) {
     getProducts(getImage: $getImage, getSpecs: $getSpecs, getCategories: $getCategories, after: $after, limit: $limit) {
       id
       name
