@@ -5,9 +5,6 @@
   import type { NavCategoryProps } from "./index";
 
   let { ...props }: NavCategoryProps = $props();
-
-  // TODO: add request via category for products
-  // TODO: add request via subcategory for products
 </script>
 
 {#if $isMobile}

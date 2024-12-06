@@ -8,7 +8,7 @@
   import { cn } from "$lib/utils/utils";
   import { BackButton, CloseButton } from "./components/buttons";
 
-  let { ...props }: NavigationProps = $props();
+  let { categories, ...props }: NavigationProps = $props();
 </script>
 
 <nav
@@ -45,21 +45,13 @@
       {/if}
     </div>
     <div class="flex flex-col md:flex-row w-full pt-2 gap-2">
-      <Category
-        id={1}
-        category="Category 1"
-        subcategories={[
-          "Subcategory 1",
-          "Subcategory 2",
-          "Subcategory 3",
-          "Subcategory 4",
-        ]}
-      />
-      <Category
-        id={2}
-        category="Category 2"
-        subcategories={["Subcategory 1"]}
-      />
+      {#each categories as category}
+        <Category
+          id={category.id}
+          {category}
+          subcategories={category.subcategories}
+        />
+      {/each}
     </div>
   </div>
 </nav>

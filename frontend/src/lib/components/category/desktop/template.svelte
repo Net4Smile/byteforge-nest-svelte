@@ -30,7 +30,7 @@
     onmouseenter={openDropdown}
     onmouseleave={closeDropdown}
   >
-    <a href={createLink("categories", category)}>
+    <a href={createLink("categories", category.name)} data-id={category.id}>
       {category} <span class="text-sm">&darr;</span>
     </a>
   </button>
@@ -44,7 +44,8 @@
   >
     {#each subcategories as subcategory}
       <a
-        href={createLink("categories", category, subcategory)}
+        href={createLink("categories", category.name, subcategory.name)}
+        data-id={subcategory.id}
         class="py-2 pr-4 pl-2 text-left hover:bg-gray-100 block"
       >
         {subcategory}

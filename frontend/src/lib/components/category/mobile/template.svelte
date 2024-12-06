@@ -18,7 +18,8 @@
     >
       {#each subcategories as subcategory}
         <a
-          href={createLink("categories", category, subcategory)}
+          href={createLink("categories", category.name, subcategory.name)}
+          data-id={subcategory.id}
           class="px-3 py-3 text-left w-full hover:bg-gray-100 transition-colors"
         >
           {subcategory}
@@ -31,6 +32,7 @@
     <button
       onclick={handleDropdown}
       class="w-full flex items-center cursor-pointer gap-1 px-3 py-3 h-full relative transition-all hover:bg-gray-100"
+      data-id={category.id}
     >
       {category} <span class="text-sm">&rarr;</span>
     </button>

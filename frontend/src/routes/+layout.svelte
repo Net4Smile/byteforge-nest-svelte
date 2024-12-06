@@ -5,7 +5,7 @@
 	import "../app.css";
 	import "$lib/stringExtensions"
 	
-  let { children } = $props();
+  let { data, children } = $props();
 	
   $effect(() => {
     const mediaQuery = window.matchMedia("(max-width: 767px)");
@@ -18,7 +18,7 @@
   });
 </script>
 
-<Navigation />
+<Navigation categories={data.categories.data.getCategories} />
 <main class="wrapper">
   <Aside />
 	<section class="w-full flex items-center justify-center gap-2">
