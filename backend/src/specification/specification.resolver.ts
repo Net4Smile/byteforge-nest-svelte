@@ -2,10 +2,11 @@ import { Query, Resolver, Args } from "@nestjs/graphql";
 import { PrismaService } from "../prisma/prisma.service";
 import { Specification } from "./specification.model";
 import { Prisma } from "@prisma/client";
+import { RedisService } from "../redis/redis.service";
 
 @Resolver()
 export class SpecificationResolver {
-  constructor(private db: PrismaService) { }
+  constructor(private db: PrismaService, private cache: RedisService) { }
 
   @Query(() => Specification, { nullable: true })
   async getSpecification(
@@ -13,15 +14,20 @@ export class SpecificationResolver {
     @Args('getProducts', { nullable: true, type: () => Boolean }) getProducts?: boolean,
     @Args('getProductsCategories', { nullable: true, type: () => Boolean }) getProductsCategories?: boolean,
   ) {
-    const products = getProducts ?? false;
-    const productsCategories = getProductsCategories ?? false;
+    const cacheKey = `specification:${id}:${getProducts}:${getProductsCategories}`;
+
+    const cacheHit = await this.cache.get(cacheKey);
+
+    if (cacheHit) {
+      return JSON.parse(cacheHit);
+    }
 
     const specificationQuery: Prisma.SpecificationFindUniqueArgs = {
       where: { id },
       include: {
-        products: products ? {
+        products: getProducts ? {
           include: {
-            categories: productsCategories
+            categories: getProductsCategories
           }
         } : false
       }
@@ -33,6 +39,8 @@ export class SpecificationResolver {
       if (!specification) {
         return null;
       }
+
+      await this.cache.set(cacheKey, JSON.stringify(specification), 600);
 
       return specification;
     } catch (e) {
@@ -46,14 +54,19 @@ export class SpecificationResolver {
     @Args('getProductsCategories', { nullable: true, type: () => Boolean }) getProductsCategories?: boolean,
 
   ) {
-    const products = getProducts ?? false;
-    const productsCategories = getProductsCategories ?? false;
+    const cacheKey = `specifications:${getProducts}:${getProductsCategories}`;
+
+    const cacheHit = await this.cache.get(cacheKey);
+
+    if (cacheHit) {
+      return JSON.parse(cacheHit);
+    }
 
     const specificationQuery: Prisma.SpecificationFindManyArgs = {
       include: {
-        products: products ? {
+        products: getProducts ? {
           include: {
-            categories: productsCategories
+            categories: getProductsCategories
           }
         } : false
       },
@@ -65,6 +78,8 @@ export class SpecificationResolver {
       if (!specifications) {
         return [];
       }
+
+      await this.cache.set(cacheKey, JSON.stringify(specifications), 600);
 
       return specifications;
     } catch (e) {

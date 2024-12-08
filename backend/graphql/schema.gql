@@ -41,7 +41,7 @@ type Query {
   getCategories(getProducts: Boolean, getSpecifications: Boolean): [Category!]!
   getCategory(getProducts: Boolean, id: String!): Category
   getProduct(getCategories: Boolean, getImage: Boolean, getSpecs: Boolean, id: String!): Product
-  getProducts(after: Float, getCategories: Boolean, getImage: Boolean, getSpecs: Boolean, limit: Float): [Product!]!
+  getProducts(after: Float, categoryName: String, getCategories: Boolean, getImage: Boolean, getSpecs: Boolean, limit: Float, specificationName: String): [Product!]!
   getSpecification(getProducts: Boolean, getProductsCategories: Boolean, id: String!): Specification
   getSpecifications(getProducts: Boolean, getProductsCategories: Boolean): [Specification!]!
   getUserInfo: User!

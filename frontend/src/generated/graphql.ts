@@ -93,10 +93,12 @@ export type QueryGetProductArgs = {
 
 export type QueryGetProductsArgs = {
   after?: InputMaybe<Scalars['Float']['input']>;
+  categoryName?: InputMaybe<Scalars['String']['input']>;
   getCategories?: InputMaybe<Scalars['Boolean']['input']>;
   getImage?: InputMaybe<Scalars['Boolean']['input']>;
   getSpecs?: InputMaybe<Scalars['Boolean']['input']>;
   limit?: InputMaybe<Scalars['Float']['input']>;
+  specificationName?: InputMaybe<Scalars['String']['input']>;
 };
 
 

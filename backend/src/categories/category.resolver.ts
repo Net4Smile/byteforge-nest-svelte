@@ -2,22 +2,29 @@ import { Query, Resolver, Args } from "@nestjs/graphql";
 import { PrismaService } from "../prisma/prisma.service";
 import { Category } from "./category.model";
 import { Prisma } from "@prisma/client";
+import { RedisService } from "../redis/redis.service";
 
 @Resolver()
 export class CategoryResolver {
-  constructor(private db: PrismaService) { }
+  constructor(private db: PrismaService, private cache: RedisService) { }
 
   @Query(() => Category, { nullable: true })
   async getCategory(
     @Args('id', { type: () => String }) id: string,
     @Args('getProducts', { nullable: true, type: () => Boolean }) getProducts?: boolean,
   ) {
-    const products = getProducts ?? false;
+    const cacheKey = `category:${id}:${getProducts}`;
+
+    const cacheHit = await this.cache.get(cacheKey);
+
+    if (cacheHit) {
+      return JSON.parse(cacheHit);
+    }
 
     const categoryQuery: Prisma.CategoryFindUniqueArgs = {
       where: { id },
       include: {
-        products,
+        products: getProducts,
         subcategories: true
       }
     } as const;
@@ -28,6 +35,8 @@ export class CategoryResolver {
       if (!category) {
         return null;
       }
+
+      await this.cache.set(cacheKey, JSON.stringify(category), 600);
 
       return category;
     } catch (e) {
@@ -40,16 +49,23 @@ export class CategoryResolver {
     @Args('getProducts', { nullable: true, type: () => Boolean }) getProducts?: boolean,
     @Args('getSpecifications', { nullable: true, type: () => Boolean }) getSpecifications?: boolean,
   ) {
-    const products = getProducts ?? false;
-    const specifications = getSpecifications ?? false;
+
+    const cacheKey = `categories:${getProducts}:${getSpecifications}`;
+
+    const cacheHit = await this.cache.get(cacheKey);
+
+    if (cacheHit) {
+      return JSON.parse(cacheHit);
+    }
 
     const categoryQuery: Prisma.CategoryFindManyArgs = {
       include: {
-        products: products ? {
+        products: getProducts ? {
           include: {
-            specs: specifications
+            specs: getSpecifications
           }
-        } : false
+        } : false,
+        subcategories: true
       }
     } as const;
 
@@ -59,6 +75,8 @@ export class CategoryResolver {
       if (!categories) {
         return [];
       }
+
+      await this.cache.set(cacheKey, JSON.stringify(categories), 600);
 
       return categories;
     } catch (e) {

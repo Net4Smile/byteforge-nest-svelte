@@ -19,8 +19,9 @@ import { SpecificationModule } from './specification/specification.module';
       driver: ApolloDriver,
       autoSchemaFile: join(process.cwd(), "/graphql/schema.gql"),
       sortSchema: true,
-      playground: false,
-      path: "/"
+      playground: true,
+      path: "/",
+      csrfPrevention: false
     }),
     ConfigModule.forRoot({
       isGlobal: true,
