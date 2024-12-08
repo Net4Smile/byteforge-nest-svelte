@@ -1,8 +1,8 @@
 model Subcategories {
-  id         String    @id @unique @default(uuid())
+  id         String   @id @unique @default(uuid())
   name       String
-  Category   Category? @relation(fields: [categoryId], references: [id])
-  categoryId String?
+  Category   Category @relation(fields: [categoryId], references: [id])
+  categoryId String
 }
 
 model Category {
