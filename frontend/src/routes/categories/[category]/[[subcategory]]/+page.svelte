@@ -5,7 +5,7 @@
 
   let { data } = $props();
 
-  const { category, subcategory } = $derived(data);
+  const { category, subcategory, products } = $derived(data);
 
   const [normalizedCategory, normalizedSubcategory] = $derived(
     normalizeLink(category, subcategory)
@@ -17,18 +17,27 @@
 </svelte:head>
 
 <main class="w-full">
-  <h2>{normalizedCategory} {normalizedSubcategory}</h2>
+  <!-- <h2>{normalizedCategory} {normalizedSubcategory}</h2> -->
   <!-- <p>{normalizedCategory}</p>
   <p>{normalizedSubcategory}</p> -->
   <div class="grid grid-cols-[repeat(auto-fit,_minmax(250px,1fr))] gap-3">
-    {#each Array(10) as _}
-      <Card
-        productId={"0"}
-        productDesc="This is a product description"
-        productImg={{ src: "" }}
-        productName="This is a product name"
-        productPrice="This is a product price"
-      />
-    {/each}
+    {#await products}
+      <p class="text-center w-full">Loading...</p>
+    {:then products}
+      {#each products.data.getProducts as product}
+        <Card
+          productId={product.id}
+          productDesc={product.description}
+          productImg={{
+            src: product.image[0].src,
+            alt: product.image[0].alt,
+            id: product.image[0].id,
+            productId: product.id,
+          }}
+          productName={product.name}
+          productPrice={product.price}
+        />
+      {/each}
+    {/await}
   </div>
 </main>
