@@ -46,11 +46,7 @@
     </div>
     <div class="flex flex-col md:flex-row w-full pt-2 gap-2">
       {#each categories as category}
-        <Category
-          id={category.id}
-          {category}
-          subcategories={category.subcategories}
-        />
+        <Category id={category.id} {category} />
       {/each}
     </div>
   </div>

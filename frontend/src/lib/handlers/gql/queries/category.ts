@@ -46,7 +46,6 @@ export const GET_CATEGORIES_QUERY: TypedDocumentNode<Pick<Query, "getCategories"
       subcategories {
         id
         name
-        value
       }
     }
 }

@@ -4,7 +4,7 @@
   import { cn } from "$lib/utils/utils";
   import type { NavCategoryProps } from "../index";
 
-  let { id, category, subcategories }: NavCategoryProps = $props();
+  let { id, category }: NavCategoryProps = $props();
 
   function openDropdown() {
     $categoryData.open = true;
@@ -30,25 +30,30 @@
     onmouseenter={openDropdown}
     onmouseleave={closeDropdown}
   >
-    <a href={createLink("categories", category.name)} data-id={category.id}>
-      {category} <span class="text-sm">&darr;</span>
+    <a
+      href={createLink("categories", category.name)}
+      data-sveltekit-preload-data
+      data-id={category.id}
+    >
+      {category.name} <span class="text-sm">&darr;</span>
     </a>
   </button>
   <button
     class={cn(
-      "same-color w-fit text-nowrap absolute transition-[max-height] shadow-lg overflow-hidden rounded-b-lg top-full left-0 max-h-0",
+      "same-color w-fit min-w-full text-nowrap absolute transition-[max-height] shadow-lg overflow-hidden rounded-b-lg top-full left-0 max-h-0",
       { "max-h-fit": isDropdownOpen }
     )}
     onmouseenter={openDropdown}
     onmouseleave={closeDropdown}
   >
-    {#each subcategories as subcategory}
+    {#each category.subcategories as subcategory}
       <a
         href={createLink("categories", category.name, subcategory.name)}
         data-id={subcategory.id}
+        data-sveltekit-preload-data
         class="py-2 pr-4 pl-2 text-left hover:bg-gray-100 block"
       >
-        {subcategory}
+        {subcategory.name}
       </a>
     {/each}
   </button>

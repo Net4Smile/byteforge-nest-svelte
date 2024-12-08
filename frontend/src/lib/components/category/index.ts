@@ -3,8 +3,7 @@ import CategoryComponent from "./template.svelte";
 
 export type NavCategoryProps = {
   id: number | string;
-  category: Category;
-  subcategories: Subcategory[];
+  category: Category
 };
 
 export default CategoryComponent
